@@ -1,0 +1,57 @@
+﻿body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Segoe UI', Calibri, Arial;
+    height: 100%;
+    width: 100%;
+}
+#div_tipoInscripcion {
+    clear: left;
+    float: left;
+    padding: 0;
+}
+#div_periodoInscripcion {
+    float: left;
+    padding: 0;
+}
+#contenedor {
+    clear: left;
+    box-sizing: border-box;
+    float: left;
+    width: 20%;
+    height:40%;
+    margin-left: 25px;
+    padding: 10px;
+}
+
+#lienzo {
+    border: 1px solid #d9d9d9;
+}
+
+#tabla_regisitro {
+    float:left;
+    padding:0;
+}
+#tablaRegistro {
+    border-collapse: collapse;
+    font-family: verdana, arial, sans-serif;
+    font-size: 0.75em;
+    line-height: 2em;
+    border: 1px solid #363;
+}
+    #tablaRegistro td{
+    padding: 0 0.5em;
+    border-top: 1px solid #ddd;
+    }
+    #tablaRegistro th {
+        padding: 0 0.5em;
+        border: 1px solid #363;
+        background-color:#363;
+        color:aliceblue;
+    }
+.text {
+    color:write;
+    font-size:20px;
+    top:50%;
+    left:50%;
+}
