@@ -1,28 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/App/interfazGrafica/Encabezado.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="GraficasILinea.App.interfazGrafica.Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        #seleccion_periodo {
+            width: 40px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link href="Styles/estilosDefault.css" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <div id="div_tipoInscripcion">
-        <label>Tipo inscripción:</label>
-        <select name="Inscripción" id="seleccion_insripcion">
-            <option>Periodo completo</option>
-            <option>Intersemestral</option>
-        </select>
+        <label>Tipo inscripción:</label>&nbsp;
     </div>
     <div id="div_periodoInscripcion">
-        <label>Periodo:</label>
-        <select name="seleccion_periodo" id="seleccion_periodo">
-            <option>""</option>
-            <option>""</option>
-        </select>
+        <asp:DropDownList ID="DropDownList1" runat="server" Height="28px" Width="204px">
+        </asp:DropDownList>
+        <label>Periodo:</label>&nbsp;
     </div>
     <div>
         <div><canvas id="graficaGeneral" width="600" height="400"></canvas></div>
-    <table id="tablaRegistro">
+        </div>
+   <!-- <table id="tablaRegistro1">
       <tr>
-          <!--esta tabla se puede crear dinamicamente-->
+          <!--esta tabla se puede crear dinamicamente
         <th>Dia</th>
         <th>Lugares sorteados</th>
         <th>Lugares inscritos</th>
@@ -56,6 +56,9 @@
         </div>
     <!--aqui-->
     <div class="container">
+        
+        <asp:DropDownList ID="DropDownList2" runat="server" Height="19px" Width="175px">
+        </asp:DropDownList>
         
     </div>
      

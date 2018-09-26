@@ -12,14 +12,15 @@ namespace GraficasILinea.App.logicaNegocio.entidades
         private int idPeriodo;
         private String tipoInsripcion;
         private String periodoInscripcion;
+        private String valor;
         private PeriodoDAOSql periodoDao;
 
         public Periodo() {
 
         }
-        public Periodo(int idPeriodo, String tipoInsripcion, String periodoInscripcion)
+        public Periodo(String valor, String tipoInsripcion, String periodoInscripcion)
         {
-            this.idPeriodo = idPeriodo;
+            this.valor = valor;
             this.tipoInsripcion = tipoInsripcion;
             this.periodoInscripcion = periodoInscripcion;
         }

@@ -21,9 +21,9 @@ namespace GraficasILinea.App.accesoDatos
                 conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GraficasSqlServer"].ToString());
                 conexion.Open();
             }
-            catch (Exception e)
+            catch (SqlException exception)
             {
-                String x = e.StackTrace.ToString();
+                exception.StackTrace.ToString();
             }
 
         }

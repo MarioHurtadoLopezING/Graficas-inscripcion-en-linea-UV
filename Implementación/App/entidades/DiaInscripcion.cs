@@ -10,13 +10,29 @@ namespace GraficasILinea.App.entidades
     {
         private int idDia;
         private int totalSorteado;
-        private DateTime fecha;
+        private String fecha;
+        private String valor;
 
-        public DiaInscripcion(int idDia, int totalSorteado, DateTime fecha) {
+        public DiaInscripcion(int idDia, int totalSorteado, String fecha) {
 
         }
+        public DiaInscripcion(String fecha, String valor) {
+            this.fecha = fecha;
+            this.valor = valor;
+        }
+
+        public DiaInscripcion()
+        {
+        }
+
         public List<DiaInscripcion> obtenerDias(String periodoInscripcion) {
-            return null;// new PeriodoDAOSql().obtenerPeriodosInscripcion(periodoInscripcion);
+            return new DiaInscripcionDAOSql().obtenerDiasInscripcion(periodoInscripcion);
+        }
+        public String getFecha() {
+            return this.fecha;
+        }
+        public String getValor() {
+            return this.valor;
         }
     }
 }

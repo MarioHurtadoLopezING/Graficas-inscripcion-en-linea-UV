@@ -30,8 +30,8 @@ namespace GraficasILinea.App.accesoDatos
                 {
                     String a = lector["FECHA"].ToString();
                     String b = lector["VALOR"].ToString();
-                    listaPeriodos.Add(new Periodo(i, "cualquiera", lector["FECHA"].ToString()));
-                    i++;
+                    //String s = lector["PERIODO"].ToString();//ni idea si l otiene
+                    listaPeriodos.Add(new Periodo(lector["VALOR"].ToString(), "ordinario", lector["FECHA"].ToString()));
                 }
             }
             catch (Exception e)
@@ -55,11 +55,11 @@ namespace GraficasILinea.App.accesoDatos
             try
             {
                 SqlDataReader lector = comando.ExecuteReader();
-                int i = 0;
                 while (lector.Read()) {
                     String s  = lector["PERIODO"].ToString();
-                    listaPeriodos.Add(new Periodo(i, "intersemestral", lector["PERIODO"].ToString()));
-                    i++;
+                    String a = lector["FECHA"].ToString();
+                    String b = lector["VALOR"].ToString();//no se si tenga este parametro
+                    listaPeriodos.Add(new Periodo("valor", "intersemestral", lector["PERIODO"].ToString()));
                 }
             }
             catch (Exception e)
