@@ -10,7 +10,7 @@ namespace GraficasILinea.App.accesoDatos
     interface DiaInscripcionDAO
     {
         List<DiaInscripcion> obtenerDiasInscripcion(String periodoInscripcion);
-        int obtenerLugaresSorteados(String diaInscripcion);
+        List<DiaInscripcion> obtenerLugaresSorteados(String diaInscripcion);
         double obtenerPorcentajeDia(int lugaresSorteados, int lugaresInscritos);
         double calcularPorcentajeTotal(List<DiaInscripcion> diaInscripcion);
     }

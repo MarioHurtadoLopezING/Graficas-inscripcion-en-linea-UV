@@ -28,7 +28,7 @@ namespace GraficasILinea.App.interfazGrafica
 
         public void mostrarDatos()
         {
-            List<DiaInscripcion> diasInscripcion = new DiaInscripcion().obtenerDias("201351");
+            List<DiaInscripcion> diasInscripcion = new DiaInscripcion().obtenerDias("");
             StringBuilder html = new StringBuilder();
             html.Append("<table id = 'tablaRegistro' border ='1'>");
             html.Append("<tr>");

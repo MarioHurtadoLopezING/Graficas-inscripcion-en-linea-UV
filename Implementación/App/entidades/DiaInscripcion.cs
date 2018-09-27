@@ -25,8 +25,10 @@ namespace GraficasILinea.App.entidades
         {
         }
 
-        public List<DiaInscripcion> obtenerDias(String periodoInscripcion) {
-            return new DiaInscripcionDAOSql().obtenerDiasInscripcion(periodoInscripcion);
+        public List<DiaInscripcion> obtenerDias(String periodoInscripcion)
+        {
+            //turn new DiaInscripcionDAOSql().obtenerDiasInscripcion(periodoInscripcion);
+            return new DiaInscripcionDAOSql().obtenerLugaresSorteados("");
         }
         public String getFecha() {
             return this.fecha;

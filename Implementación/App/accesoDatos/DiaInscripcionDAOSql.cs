@@ -20,8 +20,8 @@ namespace GraficasILinea.App.accesoDatos
             List<DiaInscripcion> diasInscripcion = new List<DiaInscripcion>();
             SqlCommand comando = new SqlCommand("PAS_FECHAS_GRAF",conexionSql.getconexionSql());
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@PERIODO", periodoInscripcion));
-            parametros.Add(new SqlParameter("@IND_MP",""));
+            parametros.Add(new SqlParameter("@PERIODO", "201901"));
+            parametros.Add(new SqlParameter("@IND_MP","MP"));
             parametros.Add(new SqlParameter("@IND_IL_PIL","2"));
             comando.CommandType = System.Data.CommandType.StoredProcedure;
             foreach (SqlParameter parametro in parametros) {
@@ -47,9 +47,33 @@ namespace GraficasILinea.App.accesoDatos
 
         }
 
-        public int obtenerLugaresSorteados(string diaInscripcion)
+        public List<DiaInscripcion> obtenerLugaresSorteados(String periodoInscripcion)
         {
-            throw new NotImplementedException();
+            List<DiaInscripcion> diasInscripcion = new List<DiaInscripcion>();
+
+            ConexionSql conexionSql = new ConexionSql();
+            SqlCommand comando = new SqlCommand("PAS_HISTORICO",conexionSql.getconexionSql());
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            comando.Parameters.Add("@PERIODO", periodoInscripcion);//"201901"
+            comando.Parameters.Add("@IND_MP", "MP");
+            comando.Parameters.Add("@IND_IL_PIL", "2");
+            try
+            {
+                SqlDataReader lector = comando.ExecuteReader();
+                while (lector.Read())
+                {
+                    String re = lector["NOMBRE"].ToString() + "--" + int.Parse(lector["TOTALSORT"].ToString()) + "--" + int.Parse(lector["TOTALINSC"].ToString());
+                    //lista.Add(new Registro(sqlDrd["NOMBRE"].ToString(), int.Parse(sqlDrd["TOTALSORT"].ToString()), int.Parse(sqlDrd["TOTALINSC"].ToString())));
+                }
+            }
+            catch (SqlException e)
+            {
+                String ex = e.StackTrace.ToString();
+            }
+            finally {
+                conexionSql.cerrarConexion();
+            }
+            return diasInscripcion;
         }
 
         public double obtenerPorcentajeDia(int lugaresSorteados, int lugaresInscritos)
