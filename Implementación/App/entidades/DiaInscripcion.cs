@@ -22,13 +22,11 @@ namespace GraficasILinea.App.entidades
             this.lugaresInscritos = lugaresInscritos;
         }
         public DiaInscripcion(){}
-        
         public List<DiaInscripcion> obtenerDiasInscripcion(string periodoInscripcion) {
             List<DiaInscripcion> diasInscripcion = new DiaInscripcionDAOSql().obtenerDiasInscripcion(periodoInscripcion);
             diasInscripcion = this.calcularPorcentajeDia(diasInscripcion);
             return diasInscripcion;
         }
-
         private List<DiaInscripcion> calcularPorcentajeDia(List<DiaInscripcion> diasInscripcion) {
             double porcentaje = 0.0;
             foreach (DiaInscripcion diaInscripcion in diasInscripcion) {
@@ -38,7 +36,6 @@ namespace GraficasILinea.App.entidades
             }
             return diasInscripcion;
         }
-
         public int getTotalLugaresSorteados(List<DiaInscripcion> diasInscripcion) {
             totalLugaresSorteados = 0;
             foreach (DiaInscripcion diaInscripcion in diasInscripcion) {
@@ -46,7 +43,6 @@ namespace GraficasILinea.App.entidades
             }
             return totalLugaresSorteados;
         }
-
         public int getTotalLugaresInscritos(List<DiaInscripcion> diasInscripcion) {
             totalLugaresInscritos = 0;
             foreach (DiaInscripcion diaInscripcion in diasInscripcion) {
@@ -60,7 +56,6 @@ namespace GraficasILinea.App.entidades
             porcentajeTotalPeriodo = porcentajeTotalPeriodo / getTotalLugaresSorteados(diasInscripcion);
             return porcentajeTotalPeriodo;
         }
-
         public void setPorcentajeDia(double porcentajeDia) {
             this.porcentajeDia = porcentajeDia;
         }
