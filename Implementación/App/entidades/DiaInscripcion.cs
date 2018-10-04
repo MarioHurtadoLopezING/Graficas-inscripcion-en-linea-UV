@@ -8,33 +8,73 @@ namespace GraficasILinea.App.entidades
 {
     public class DiaInscripcion
     {
-        private int idDia;
-        private int totalSorteado;
         private String fecha;
-        private String valor;
+        private int lugaresSorteados;
+        private int lugaresInscritos;
+        private int totalLugaresSorteados;
+        private int totalLugaresInscritos;
+        private double porcentajeTotalPeriodo;
+        private double porcentajeDia;
 
-        public DiaInscripcion(int idDia, int totalSorteado, String fecha) {
-
-        }
-        public DiaInscripcion(String fecha, String valor) {
+        public DiaInscripcion(String fecha, int lugaresSorteados, int lugaresInscritos) {
             this.fecha = fecha;
-            this.valor = valor;
+            this.lugaresSorteados = lugaresSorteados;
+            this.lugaresInscritos = lugaresInscritos;
+        }
+        public DiaInscripcion(){}
+        
+        public List<DiaInscripcion> obtenerDiasInscripcion(string periodoInscripcion) {
+            List<DiaInscripcion> diasInscripcion = new DiaInscripcionDAOSql().obtenerDiasInscripcion(periodoInscripcion);
+            diasInscripcion = this.calcularPorcentajeDia(diasInscripcion);
+            return diasInscripcion;
         }
 
-        public DiaInscripcion()
-        {
+        private List<DiaInscripcion> calcularPorcentajeDia(List<DiaInscripcion> diasInscripcion) {
+            double porcentaje = 0.0;
+            foreach (DiaInscripcion diaInscripcion in diasInscripcion) {
+                porcentaje = diaInscripcion.getLugaresInscritos() * 100;
+                porcentaje = porcentaje / diaInscripcion.getLugaresSorteados();
+                diaInscripcion.setPorcentajeDia(porcentaje);
+            }
+            return diasInscripcion;
         }
 
-        public List<DiaInscripcion> obtenerDias(String periodoInscripcion)
-        {
-            //turn new DiaInscripcionDAOSql().obtenerDiasInscripcion(periodoInscripcion);
-            return new DiaInscripcionDAOSql().obtenerLugaresSorteados("");
+        public int getTotalLugaresSorteados(List<DiaInscripcion> diasInscripcion) {
+            totalLugaresSorteados = 0;
+            foreach (DiaInscripcion diaInscripcion in diasInscripcion) {
+                totalLugaresSorteados = totalLugaresSorteados + diaInscripcion.getLugaresSorteados();
+            }
+            return totalLugaresSorteados;
+        }
+
+        public int getTotalLugaresInscritos(List<DiaInscripcion> diasInscripcion) {
+            totalLugaresInscritos = 0;
+            foreach (DiaInscripcion diaInscripcion in diasInscripcion) {
+                totalLugaresInscritos = totalLugaresInscritos + diaInscripcion.getLugaresInscritos();
+            }
+            return totalLugaresInscritos;
+        }
+        public double getTotalPeriodoInscripcion(List<DiaInscripcion> diasInscripcion) {
+            porcentajeTotalPeriodo = getTotalLugaresInscritos(diasInscripcion);
+            porcentajeTotalPeriodo = porcentajeTotalPeriodo * 100;
+            porcentajeTotalPeriodo = porcentajeTotalPeriodo / getTotalLugaresSorteados(diasInscripcion);
+            return porcentajeTotalPeriodo;
+        }
+
+        public void setPorcentajeDia(double porcentajeDia) {
+            this.porcentajeDia = porcentajeDia;
+        }
+        public double getPorcentajeDia() {
+            return this.porcentajeDia;
+        }
+        public int getLugaresSorteados() {
+            return this.lugaresSorteados;
+        }
+        public int getLugaresInscritos() {
+            return this.lugaresInscritos;
         }
         public String getFecha() {
             return this.fecha;
-        }
-        public String getValor() {
-            return this.valor;
         }
     }
 }

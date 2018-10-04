@@ -20,41 +20,6 @@
     <div>
         <div><canvas id="graficaGeneral" width="600" height="400"></canvas></div>
         </div>
-   <!-- <table id="tablaRegistro1">
-      <tr>
-          <!--esta tabla se puede crear dinamicamente
-        <th>Dia</th>
-        <th>Lugares sorteados</th>
-        <th>Lugares inscritos</th>
-        <th>total %</th>
-      </tr>
-      <tr>
-        <td>""</td>
-        <td>""</td>
-        <td>""</td>
-        <td>""</td>
-      </tr>
-      <tr>
-        <td>""</td>
-        <td>""</td>
-        <td>""</td>
-        <td>""</td>
-      </tr>
-      <tr>
-        <td>""</td>
-        <td>""</td>
-        <td>""</td>
-        <td>""</td>
-      </tr>
-        <tr>
-        <td>""</td>
-        <td>""</td>
-        <td>""</td>
-        <td>""</td>
-      </tr>
-    </table>
-        </div>
-    <!--aqui-->
     <div class="container">
         
         <asp:DropDownList ID="DropDownList2" runat="server" Height="19px" Width="175px">
