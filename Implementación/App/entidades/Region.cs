@@ -55,7 +55,7 @@ namespace GraficasILinea.App.entidades
             }
             return totalLugaresInscritos;
         }
-        public double getTotalPeriodoInscripcion(List<Region> regionesInscripcion)
+        public double getTotalRegionInscripcion(List<Region> regionesInscripcion)
         {
             porcentajeTotalRegion = getTotalLugaresInscritos(regionesInscripcion);
             porcentajeTotalRegion = porcentajeTotalRegion * 100;
@@ -70,6 +70,10 @@ namespace GraficasILinea.App.entidades
         }
         public int getLugaresInscritos() {
             return this.lugaresInscritos;
+        }
+        public string getNombreRegion()
+        {
+            return this.nombreRegion;
         }
     }
 }

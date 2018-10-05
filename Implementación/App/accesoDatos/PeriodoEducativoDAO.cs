@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace GraficasILinea.App.accesoDatos
 {
-    interface DiaInscripcionDAO
+    interface PeriodoEducativoDAO
     {
-        List<DiaInscripcion> obtenerDiasInscripcion(string periodoInscripcion);
+        List<PeriodoEducativo> obtenerPeriodosEducativos();
     }
 }

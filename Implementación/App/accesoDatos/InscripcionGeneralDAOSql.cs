@@ -7,14 +7,14 @@ using System.Data.SqlClient;
 
 namespace GraficasILinea.App.accesoDatos
 {
-    public class DiaInscripcionDAOSql : DiaInscripcionDAO
+    public class InscripcionGeneralDAOSql : InscripcionGeneralDAO
     {
-        public List<DiaInscripcion> obtenerDiasInscripcion(string periodoInscripcion)
+        public List<InscripcionGeneral> obtenerDiasInscripcion(string periodoInscripcion)
         {
-            List<DiaInscripcion> diasInscripcion = new List<DiaInscripcion>();
+            List<InscripcionGeneral> diasInscripcion = new List<InscripcionGeneral>();
             List<SqlParameter> parametrosSql = new List<SqlParameter>();
             parametrosSql.Add(new SqlParameter("@PERIODO", periodoInscripcion));//201901 es la fecha como un acronimo acortado
-            parametrosSql.Add(new SqlParameter("@IND_MP", "MP"));//MP proceso almacenado? al parecer solo funciona con 2018 - 2019// funciona para obtener la fecha mas actual
+            parametrosSql.Add(new SqlParameter("@IND_MP", "MP"));//MP proceso almacenado? al parecer solo funciona con 2018 - 2019// funciona para obtener la fecha mas actual//Funciona la primera vez que se hacew la peticion
             parametrosSql.Add(new SqlParameter("@IND_IL_PIL", "2"));//indice de inscripcion????// ews una constante entonces puede ser un marcador
             ConexionSql conexion = new ConexionSql();
             SqlCommand comandoSql = new SqlCommand("PAS_HISTORICO", conexion.getconexionSql());
@@ -28,7 +28,7 @@ namespace GraficasILinea.App.accesoDatos
                 while (lector.Read())
                 {
                     //String xz = lector["NOMBRE"].ToString() + " " + lector["TOTALSORT"].ToString() + " " + lector["TOTALINSC"].ToString();
-                    diasInscripcion.Add(new DiaInscripcion(lector["NOMBRE"].ToString(), int.Parse(lector["TOTALSORT"].ToString()), int.Parse(lector["TOTALINSC"].ToString())));
+                    diasInscripcion.Add(new InscripcionGeneral(lector["NOMBRE"].ToString(), int.Parse(lector["TOTALSORT"].ToString()), int.Parse(lector["TOTALINSC"].ToString())));
                 }
             }
             catch (SqlException excepcionSql)

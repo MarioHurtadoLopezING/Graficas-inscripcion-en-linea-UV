@@ -16,11 +16,11 @@ namespace GraficasILinea.App.interfazGrafica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<Region> dias = new RegionDAOSql().obtenerRegionesInscripcion("201901");//.obtenerDiasInscripcion("201901");
-           // int totaLSort = new DiaInscripcion().getTotalLugaresSorteados(dias);
-            //int totaLugInsc = new DiaInscripcion().getTotalLugaresInscritos(dias);
-            //double total = new DiaInscripcion().getTotalPeriodoInscripcion(dias);
-
+            /* List<AreaAcademica> areas = new AreaAcademicaDAOSql().obtenerAreasAcademicasInscripcion("201901");//.obtenerDiasInscripcion("201901");
+             int totaLSort = new AreaAcademica().getTotalLugaresSorteados(areas);
+             int totaLugInsc = new AreaAcademica().getTotalLugaresInscritos(areas);
+             double total = new AreaAcademica().getTotalPeriodoInscripcion(areas);*/
+            new PeriodoEducativoDAOSql().obtenerPeriodosEducativos();
         }
     }
 }
