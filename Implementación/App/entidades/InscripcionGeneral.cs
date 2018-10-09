@@ -1,4 +1,5 @@
 ﻿using GraficasILinea.App.accesoDatos;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,14 +7,22 @@ using System.Web;
 
 namespace GraficasILinea.App.entidades
 {
+    [JsonObject(MemberSerialization.OptOut)]
     public class InscripcionGeneral
     {
+        [JsonProperty]
         private String fecha;
+        [JsonProperty]
         private int lugaresSorteados;
+        [JsonProperty]
         private int lugaresInscritos;
+        [JsonProperty]
         private int totalLugaresSorteados;
+        [JsonProperty]
         private int totalLugaresInscritos;
+        [JsonProperty]
         private double porcentajeTotalPeriodo;
+        [JsonProperty]
         private double porcentajeDia;
 
         public InscripcionGeneral(String fecha, int lugaresSorteados, int lugaresInscritos) {
@@ -21,7 +30,7 @@ namespace GraficasILinea.App.entidades
             this.lugaresSorteados = lugaresSorteados;
             this.lugaresInscritos = lugaresInscritos;
         }
-        public InscripcionGeneral(){}
+        public InscripcionGeneral() { }
         public List<InscripcionGeneral> obtenerDiasInscripcion(string periodoInscripcion) {
             List<InscripcionGeneral> diasInscripcion = new InscripcionGeneralDAOSql().obtenerDiasInscripcion(periodoInscripcion);
             diasInscripcion = this.calcularPorcentajeDia(diasInscripcion);
@@ -55,6 +64,15 @@ namespace GraficasILinea.App.entidades
             porcentajeTotalPeriodo = porcentajeTotalPeriodo * 100;
             porcentajeTotalPeriodo = porcentajeTotalPeriodo / getTotalLugaresSorteados(diasInscripcion);
             return porcentajeTotalPeriodo;
+        }
+        public void setTotalPeriodoInscripcion(double porcentajeTotalPeriodo) {
+            this.porcentajeTotalPeriodo = porcentajeTotalPeriodo;
+        }
+        public void setgetTotalLugaresSorteados(int totalLugaresSorteados) {
+            this.totalLugaresSorteados = totalLugaresSorteados;
+        }
+        public void setTotalLugaresInscritos(int totalLugaresInscritos) {
+            this.totalLugaresInscritos = totalLugaresInscritos;
         }
         public void setPorcentajeDia(double porcentajeDia) {
             this.porcentajeDia = porcentajeDia;

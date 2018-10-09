@@ -7,25 +7,12 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <link href="Styles/estilosDefault.css" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-    <div id="div_tipoInscripcion">
-        <label>Tipo inscripción:</label>&nbsp;
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <div id ="combos">
     </div>
-    <div id="div_periodoInscripcion">
-        <asp:DropDownList ID="DropDownList1" runat="server" Height="28px" Width="204px">
-        </asp:DropDownList>
-        <label>Periodo:</label>&nbsp;
-    </div>
-    <div>
-        <div><canvas id="graficaGeneral" width="600" height="400"></canvas></div>
-        </div>
-    <div class="container">
-        
-        <asp:DropDownList ID="DropDownList2" runat="server" Height="19px" Width="175px">
-        </asp:DropDownList>
-        
-    </div>
+
+    <script src="../Scripts/default.js"></script>
      
-    <script src="../Scripts/Graficas.js"></script>
+
 </asp:Content>

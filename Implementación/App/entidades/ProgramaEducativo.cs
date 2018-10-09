@@ -1,4 +1,5 @@
 ﻿using GraficasILinea.App.accesoDatos;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Web;
 
 namespace GraficasILinea.App.entidades
 {
+    [JsonObject(MemberSerialization.OptOut)]
     public class ProgramaEducativo
     {
         private String nombreProgramaEducativo;
