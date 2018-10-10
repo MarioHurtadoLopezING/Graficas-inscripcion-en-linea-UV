@@ -28,15 +28,7 @@ namespace GraficasILinea.App.interfazGrafica
         }
         [System.Web.Services.WebMethod]
         public static String getDiasInscripcion(String fecha) {
-            List<InscripcionGeneral> inscripciones = new InscripcionGeneral().obtenerDiasInscripcion(fecha);
-            int totalLugaresSoreteados = new InscripcionGeneral().getTotalLugaresSorteados(inscripciones);
-            int totalLugaresInscritos = new InscripcionGeneral().getTotalLugaresInscritos(inscripciones);
-            double totalPeriodoInscripcion = new InscripcionGeneral().getTotalPeriodoInscripcion(inscripciones);
-            foreach (InscripcionGeneral inscripcion in inscripciones) {
-                inscripcion.setgetTotalLugaresSorteados(totalLugaresSoreteados);
-                inscripcion.setTotalLugaresInscritos(totalLugaresInscritos);
-                inscripcion.setTotalPeriodoInscripcion(totalPeriodoInscripcion);
-            }
+            List<InscripcionGeneral> inscripciones = new InscripcionGeneral().obtenerDiasInscripcion(fecha);         
             var jsonList = JsonConvert.SerializeObject(inscripciones);
             return jsonList;
         }

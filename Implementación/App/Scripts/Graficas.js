@@ -1,50 +1,100 @@
-﻿window.addEventListener("load", function (event) {
-    event.preventDefault();
-    cargarGraficaBarras();
-});
-function cargarGraficaBarras() {
-    graficaGeneral = document.getElementById("graficaGeneral");
-    Chart.defaults.global.defaultFontSize = 18;
+﻿function graficaBarras(lista) {
+    var divGraficas = document.getElementById("graficas");
+    var canvasGraficas = document.createElement("canvas");
+    divGraficas.appendChild(canvasGraficas);
+    canvasGraficas.id = "canvasGraficas";
+    var fechas = [];
+    var lugaresSorteados = [];
+    var lugaresInscritos = [];
+    $.each(lista, function (i, item) {
+        console.log(item);
+        fechas.push(item["fecha"]);
+        lugaresSorteados.push(item["lugaresSorteados"]);
+        lugaresInscritos.push(item["lugaresInscritos"]);
+    });
+    var datosGrafica = {
+        labels: fechas,
+        datasets: [
+            {
+                label: "Lugares sorteados",
+                backgroundColor: 'rgba(99, 132, 0, 0.6)',
+                borderColor: 'rgba(99, 132, 0, 1)',
+                data: lugaresSorteados
+            },
+            {
+                label: "Lugares inscritos",
+                backgroundColor: 'rgba(0, 99, 132, 0.6)',
+                borderColor: 'rgba(0, 99, 132, 1)',
+                data: lugaresInscritos
+            }
+        ]
+    };
+    var myBarChart = new Chart(canvasGraficas, {
+        type: 'bar',
+        data: datosGrafica
+    });
 }
+function graficaPastel(lista) {
+    var divGraficas = document.getElementById("graficas");
+    var canvasGraficas = document.createElement("canvas");
+    divGraficas.appendChild(canvasGraficas);
+    canvasGraficas.id = "canvasGraficas";
 
-
-var densityData = {
-    label: 'Density of Planet (kg/m3)',
-    data: [5427, 5243, 5514, 3933, 1326, 687, 1271, 1638],
-    backgroundColor: 'rgba(0, 99, 132, 0.6)',
-    borderWidth: 0,
-    yAxisID: "y-axis-density"
-};
-
-var gravityData = {
-    label: 'Gravity of Planet (m/s2)',
-    data: [3.7, 8.9, 9.8, 3.7, 23.1, 9.0, 8.7, 11.0],
-    backgroundColor: 'rgba(99, 132, 0, 0.6)',
-    borderWidth: 0,
-    yAxisID: "y-axis-gravity"
-};
-
-var planetData = {
-    labels: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"],
-    datasets: [densityData, gravityData]
-};
-
-var chartOptions = {
-    scales: {
-        xAxes: [{
-            barPercentage: 1,
-            categoryPercentage: 0.6
-        }],
-        yAxes: [{
-            id: "y-axis-density"
-        }, {
-            id: "y-axis-gravity"
-        }]
-    }
-};
-
-var barChart = new Chart(graficaGeneral, {
-    type: 'bar',
-    data: planetData,
-    options: chartOptions
-});
+    var totalSorteado = 0;
+    var totalInscrito = 0;
+    $.each(lista, function (i, item) {
+        totalSorteado = totalSorteado + item["lugaresSorteados"];
+        totalInscrito = totalInscrito + item["lugaresInscritos"];
+    });
+    var datosGrafica = {
+        labels: ["Total sorteados","Total inscritos"],
+        datasets: [{
+            data: [totalSorteado, totalInscrito],
+            backgroundColor: [
+                "rgba(99, 132, 0, 0.6)",
+                "rgba(0, 99, 132, 0.6)",
+            ]
+        }]  
+    };
+    alert();
+    var myBarChart = new Chart(canvasGraficas, {
+        type: 'pie',
+        data: datosGrafica
+    });
+}
+function graficaLineal(lista) {
+    var divGraficas = document.getElementById("graficas");
+    var canvasGraficas = document.createElement("canvas");
+    divGraficas.appendChild(canvasGraficas);
+    canvasGraficas.id = "canvasGraficas";
+    var fechas = [];
+    var lugaresSorteados = [];
+    var lugaresInscritos = [];
+    $.each(lista, function (i, item) {
+        console.log(item);
+        fechas.push(item["fecha"]);
+        lugaresSorteados.push(item["lugaresSorteados"]);
+        lugaresInscritos.push(item["lugaresInscritos"]);
+    });
+    var datosGrafica = {
+        labels: fechas,
+        datasets: [
+            {
+                label: "Lugares sorteados",
+                backgroundColor: 'rgba(99, 132, 0, 0.6)',
+                borderColor: 'rgba(99, 132, 0, 1)',
+                data: lugaresSorteados
+            },
+            {
+                label: "Lugares inscritos",
+                backgroundColor: 'rgba(0, 99, 132, 0.6)',
+                borderColor: 'rgba(0, 99, 132, 1)',
+                data: lugaresInscritos
+            }
+        ]
+    };
+    var myBarChart = new Chart(canvasGraficas, {
+        type: 'line',
+        data: datosGrafica
+    });
+}

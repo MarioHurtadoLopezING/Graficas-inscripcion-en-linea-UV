@@ -34,7 +34,11 @@ function crearCombo(lista) {
     });
     document.getElementById("combos").appendChild(comboFechas);
 }
-function buscarRegistros(fecha,lista) {
+function buscarRegistros(fecha, lista) {
+    var div = document.getElementById("graficas");
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
     console.log(fecha);
     var objeto;
     $.each(lista, function (i, item){
@@ -43,10 +47,11 @@ function buscarRegistros(fecha,lista) {
         }
     });
     console.log(objeto);
+    console.log(objeto["valorRegistro"]);
     $.ajax({
         type: "POST",
         url: 'Default.aspx/getDiasInscripcion',
-        data: JSON.stringify({ fecha:"201901"}),
+        data: JSON.stringify({ fecha: objeto["valorRegistro"]}),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: true,
@@ -68,6 +73,12 @@ function buscarRegistros(fecha,lista) {
 }
 function crearTabla(lista){
     console.log(lista);
+    var totalSorteado = 0;
+    var totalInscrito = 0;
+    $.each(lista, function (i, item) {
+        totalSorteado = totalSorteado + item["lugaresSorteados"];
+        totalInscrito = totalInscrito + item["lugaresInscritos"];
+    });
     var tabla = document.createElement("table");
     tabla.id = "tablasDias";
     for (var i = 0; i < lista.length; i++) {
@@ -79,6 +90,8 @@ function crearTabla(lista){
             celda.appendChild(texto);
             filaEncabezado.appendChild(celda);
         }
+        var texto = document.createTextNode("% Total");
+        filaEncabezado.appendChild(document.createElement("th").appendChild(texto));
         tabla.appendChild(filaEncabezado);
         break;
     }
@@ -91,8 +104,22 @@ function crearTabla(lista){
             celda.appendChild(texto);
             fila.appendChild(celda);
         }
+        var resultado = objeto["lugaresInscritos"] * 100;
+        resultado = resultado / objeto["lugaresSorteados"];
+        fila.appendChild(document.createElement("td").appendChild(document.createTextNode(resultado)));
         tabla.appendChild(fila);
     }
+    var fila = document.createElement("tr");
+    fila.appendChild(document.createElement("td").appendChild(document.createTextNode("total")));
+    fila.appendChild(document.createElement("td").appendChild(document.createTextNode(totalSorteado)));
+    fila.appendChild(document.createElement("td").appendChild(document.createTextNode(totalInscrito)));
+    var total = totalInscrito * 100;
+    total = total / totalSorteado;
+    fila.appendChild(document.createElement("td").appendChild(document.createTextNode(total)));
 
-    document.getElementById("combos").appendChild(tabla);
+    document.getElementById("graficas").appendChild(tabla);
+    document.getElementById("tablasDias").appendChild(fila);
+    graficaPastel(lista);
+    graficaBarras(lista);
+    graficaLineal(lista);
 }
