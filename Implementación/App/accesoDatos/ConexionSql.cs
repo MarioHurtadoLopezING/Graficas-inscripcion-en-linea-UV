@@ -23,7 +23,7 @@ namespace GraficasILinea.App.accesoDatos
             }
             catch (SqlException exception)
             {
-                throw exception;
+                 throw exception;
             }
 
         }

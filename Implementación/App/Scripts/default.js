@@ -90,8 +90,10 @@ function crearTabla(lista){
             celda.appendChild(texto);
             filaEncabezado.appendChild(celda);
         }
+        var celda = document.createElement("th");
         var texto = document.createTextNode("% Total");
-        filaEncabezado.appendChild(document.createElement("th").appendChild(texto));
+        celda.appendChild(texto);
+        filaEncabezado.appendChild(celda);
         tabla.appendChild(filaEncabezado);
         break;
     }
@@ -110,16 +112,35 @@ function crearTabla(lista){
         tabla.appendChild(fila);
     }
     var fila = document.createElement("tr");
-    fila.appendChild(document.createElement("td").appendChild(document.createTextNode("total")));
-    fila.appendChild(document.createElement("td").appendChild(document.createTextNode(totalSorteado)));
-    fila.appendChild(document.createElement("td").appendChild(document.createTextNode(totalInscrito)));
+    var celda = document.createElement("td");
+    var texto = document.createTextNode("Total");
+    celda.appendChild(texto);
+    fila.appendChild(celda);
+
+    var celda1 = document.createElement("td");
+    var texto1 = document.createTextNode(totalSorteado);
+    celda1.appendChild(texto1);
+    fila.appendChild(celda1);
+
+    var celda2 = document.createElement("td");
+    var texto2 = document.createTextNode(totalInscrito);
+    celda2.appendChild(texto2);
+    fila.appendChild(celda2);
+
     var total = totalInscrito * 100;
     total = total / totalSorteado;
-    fila.appendChild(document.createElement("td").appendChild(document.createTextNode(total)));
+    var celda3 = document.createElement("td");
+    var texto3 = document.createTextNode(total);
+    celda3.appendChild(texto3);
+    fila.appendChild(celda3);
 
+    tabla.appendChild(fila);
     document.getElementById("graficas").appendChild(tabla);
-    document.getElementById("tablasDias").appendChild(fila);
+    
     graficaPastel(lista);
     graficaBarras(lista);
     graficaLineal(lista);
+    document.getElementById("menuRegion").addEventListener("click", function () {
+        alert();
+    });
 }

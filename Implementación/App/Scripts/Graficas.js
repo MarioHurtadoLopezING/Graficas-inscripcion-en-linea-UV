@@ -56,7 +56,6 @@ function graficaPastel(lista) {
             ]
         }]  
     };
-    alert();
     var myBarChart = new Chart(canvasGraficas, {
         type: 'pie',
         data: datosGrafica
