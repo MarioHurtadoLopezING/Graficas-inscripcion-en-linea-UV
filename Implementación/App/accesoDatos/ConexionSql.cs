@@ -25,15 +25,15 @@ namespace GraficasILinea.App.accesoDatos
             {
                  throw exception;
             }
-
         }
+
         public SqlConnection getconexionSql() {
             return this.conexion;
         }
 
         public void cerrarConexion() {
             conexion.Close();
+            conexion.Dispose();
         }
-
     }
 }

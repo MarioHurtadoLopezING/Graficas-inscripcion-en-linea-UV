@@ -11,16 +11,10 @@ namespace GraficasILinea.App.accesoDatos
     {
         public List<InscripcionGeneral> obtenerDiasInscripcion(String periodoInscripcion)
         {
-            String procedimiento = "";
-            if (periodoInscripcion.Contains("MP"))
-            {
-                procedimiento = "MP";
-            }
-            String fecha = periodoInscripcion.Split('|')[0];
             List<InscripcionGeneral> diasInscripcion = new List<InscripcionGeneral>();
             List<SqlParameter> parametrosSql = new List<SqlParameter>();
-            parametrosSql.Add(new SqlParameter("@PERIODO", fecha));
-            parametrosSql.Add(new SqlParameter("@IND_MP", procedimiento));
+            parametrosSql.Add(new SqlParameter("@PERIODO", periodoInscripcion.Split('|')[0]));
+            parametrosSql.Add(new SqlParameter("@IND_MP", (periodoInscripcion.Contains("MP")?"MP":"")));
             parametrosSql.Add(new SqlParameter("@IND_IL_PIL", "2"));
             ConexionSql conexion = new ConexionSql();
             SqlCommand comandoSql = new SqlCommand("PAS_HISTORICO", conexion.getconexionSql());

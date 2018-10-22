@@ -1,14 +1,28 @@
-﻿function graficaBarras(lista) {
-    var divGraficas = document.getElementById("graficas");
-    var canvasGraficas = document.createElement("canvas");
-    divGraficas.appendChild(canvasGraficas);
-    canvasGraficas.id = "canvasGraficas";
+﻿
+function graficaBarras(lista) {
+    document.getElementById("pastel").addEventListener("click", function () {
+        graficaPastel(lista);
+    });
+    document.getElementById("barra").addEventListener("click", function () {
+        graficaBarras(lista);
+    });
+    document.getElementById("linea").addEventListener("click", function () {
+        graficaLineal(lista);
+    });
+    var canvasGraficas = document.getElementById("canvas");
+    var ctx = canvasGraficas.getContext("2d");
+    ctx.clearRect(0, 0, canvasGraficas.width, canvasGraficas.height);
+
     var fechas = [];
     var lugaresSorteados = [];
     var lugaresInscritos = [];
     $.each(lista, function (i, item) {
-        console.log(item);
-        fechas.push(item["fecha"]);
+
+        if (item["fecha"]) {
+            fechas.push(item["fecha"]);
+        } else if (item["nombreRegion"]) {
+            fechas.push(item["nombreRegion"]);
+        }
         lugaresSorteados.push(item["lugaresSorteados"]);
         lugaresInscritos.push(item["lugaresInscritos"]);
     });
@@ -32,14 +46,11 @@
     var myBarChart = new Chart(canvasGraficas, {
         type: 'bar',
         data: datosGrafica
+        
     });
 }
 function graficaPastel(lista) {
-    var divGraficas = document.getElementById("graficas");
-    var canvasGraficas = document.createElement("canvas");
-    divGraficas.appendChild(canvasGraficas);
-    canvasGraficas.id = "canvasGraficas";
-
+    var canvasGraficas = document.getElementById("canvas");
     var totalSorteado = 0;
     var totalInscrito = 0;
     $.each(lista, function (i, item) {
@@ -62,16 +73,16 @@ function graficaPastel(lista) {
     });
 }
 function graficaLineal(lista) {
-    var divGraficas = document.getElementById("graficas");
-    var canvasGraficas = document.createElement("canvas");
-    divGraficas.appendChild(canvasGraficas);
-    canvasGraficas.id = "canvasGraficas";
+    var canvasGraficas = document.getElementById("canvas");
     var fechas = [];
     var lugaresSorteados = [];
     var lugaresInscritos = [];
     $.each(lista, function (i, item) {
-        console.log(item);
-        fechas.push(item["fecha"]);
+        if (item["fecha"]) {
+            fechas.push(item["fecha"]);
+        } else if (item["nombreRegion"]) {
+            fechas.push(item["nombreRegion"]);
+        }
         lugaresSorteados.push(item["lugaresSorteados"]);
         lugaresInscritos.push(item["lugaresInscritos"]);
     });

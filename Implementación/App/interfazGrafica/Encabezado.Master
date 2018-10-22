@@ -7,31 +7,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Gráficas Inscripción</title>
     <link href="Styles/estilos.css" rel="stylesheet" type="text/css" />
-    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <link href="Styles/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="div-nombre-uv">
-            <span id="span-nombre-uv">Universidad Veracruzana</span>
-        </div>
-        <div>
-            <span id="span-estadistica-inscripcion">Estadísticas de inscripción</span>
-        </div>
-        <div>
-            <span id="span-titulo-inscripcion-linea">Gráficas de inscripción en línea</span>
-        </div>
-        <!--menu del sistema-->
-        <div>
-            <ul id="menu_general">
-                <li><a href="Default.aspx">Muestra general</a></li>
-                <li id="menuRegion"><a href="inscripcionRegion.aspx">Región</a></li>
-                <li><a href="#">Área académica</a></li>
-                <li><a href="#">Programa educativo</a></li>
-            </ul>
-        </div>
-        <!--termina el menu -->         
+        <div id="estatico">
+			<div id="div-nombre-uv">
+				<span id="span-nombre-uv">Universidad Veracruzana</span>
+			</div>
+			<div id ="div2">
+				<p>Gráficas de inscripción en línea</p>
+				<ul>
+					<li><a href="Default.aspx">Muestra general</a></li>
+					<li><a id="menuRegion">Región</a></li>
+					<li><a href="#">Área académica</a></li>
+					<li><a href="#">Programa educativo</a></li>
+				</ul>
+			</div>
+		</div>  
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

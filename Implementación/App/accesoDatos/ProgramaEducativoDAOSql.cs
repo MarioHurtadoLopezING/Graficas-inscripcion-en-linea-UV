@@ -16,8 +16,8 @@ namespace GraficasILinea.App.accesoDatos
             parametrosSql.Add(new SqlParameter("@REGION", "0"));
             parametrosSql.Add(new SqlParameter("@AREA", "0"));
             parametrosSql.Add(new SqlParameter("@FECHA", "0"));
-            parametrosSql.Add(new SqlParameter("@PERIODO", periodoInscripcion));
-            parametrosSql.Add(new SqlParameter("@IND_MP", "MP"));
+            parametrosSql.Add(new SqlParameter("@PERIODO", periodoInscripcion.Split('|')[0]));
+            parametrosSql.Add(new SqlParameter("@IND_MP", (periodoInscripcion.Contains("MP") ? "MP" : "")));
             parametrosSql.Add(new SqlParameter("@IND_IL_PIL", "2"));
             ConexionSql conexion = new ConexionSql();
             SqlCommand comandoSql = new SqlCommand("PAS_XPROGRAMA", conexion.getconexionSql());
@@ -31,7 +31,6 @@ namespace GraficasILinea.App.accesoDatos
                 SqlDataReader lector = comandoSql.ExecuteReader();
                 while (lector.Read())
                 {
-                    String xz = lector["NOMBRE"].ToString() + " " + lector["TOTALSORT"].ToString() + " " + lector["TOTALINSC"].ToString();
                     programasEducativos.Add(new ProgramaEducativo(lector["NOMBRE"].ToString(), int.Parse(lector["TOTALSORT"].ToString()), int.Parse(lector["TOTALINSC"].ToString())));
                 }
             }

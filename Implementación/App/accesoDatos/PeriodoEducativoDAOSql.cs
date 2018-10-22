@@ -21,8 +21,10 @@ namespace GraficasILinea.App.accesoDatos
                 SqlDataReader lector = comandoSql.ExecuteReader();
                 while (lector.Read())
                 {
-                    String xz = lector["FECHA"].ToString() + " " + lector["VALOR"].ToString();
-                    periodosEducativos.Add(new PeriodoEducativo(lector["FECHA"].ToString(), lector["VALOR"].ToString()));
+                    if (!lector["FECHA"].ToString().Contains("JUNIO"))
+                    {
+                        periodosEducativos.Add(new PeriodoEducativo(lector["FECHA"].ToString(), lector["VALOR"].ToString()));
+                    }
                 }
             }
             catch (SqlException excepcionSql)
@@ -34,6 +36,35 @@ namespace GraficasILinea.App.accesoDatos
                 conexion.cerrarConexion();
             }
             return periodosEducativos;
+        }
+        public List<PeriodoEducativo> ObtenerDiasInscripcion(String periodoEducativo)
+        {
+            List<PeriodoEducativo> diasInscripcion = new List<PeriodoEducativo>();
+            ConexionSql conexionSql = new ConexionSql();
+            SqlCommand comandoSql = new SqlCommand("PAS_FECHAS_GRAF",conexionSql.getconexionSql());
+            comandoSql.CommandType = System.Data.CommandType.StoredProcedure;
+            comandoSql.Parameters.Add(new SqlParameter("@PERIODO", periodoEducativo.Split('|')[0]));
+            comandoSql.Parameters.Add(new SqlParameter("@IND_MP", (periodoEducativo.Contains("MP") ? "MP" : "")));
+            comandoSql.Parameters.Add(new SqlParameter("@IND_IL_PIL","2"));
+            try
+            {
+                SqlDataReader lector = comandoSql.ExecuteReader();
+                while (lector.Read())
+                {
+                    diasInscripcion.Add(new PeriodoEducativo(lector["FECHA"].ToString(), lector["VALOR"].ToString()));
+
+                }
+            }
+            catch (SqlException excepcionSql)
+            {
+                throw excepcionSql;
+            }
+            finally
+            {
+                conexionSql.cerrarConexion();
+            }
+
+            return diasInscripcion;
         }
     }
 }

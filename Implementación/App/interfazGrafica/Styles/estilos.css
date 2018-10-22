@@ -1,21 +1,21 @@
 ﻿body {
     margin: 0px;
     padding: 0px;
-    font-family: 'Segoe UI', Calibri, Arial;
+    font-family: 'Segoe UI', sans-serif, Arial;
     height: 100%;
     width: 100%;
 }
+
 #div-nombre-uv {
     width: 80%;
-    /*height: 55px;*/
     float: right;
-    background: -moz-linear-gradient(left, #fff 5%, #069 50%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(5%,#fff), color-stop(50%,#069)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left, #fff 5%,#069 50%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(left, #fff 5%,#069 50%); /* Opera 11.10+ */
-    background: linear-gradient(to right, #fff 5%,#069 50%); /* W3C */
+    background: -moz-linear-gradient(left, #fff 5%, #069 50%);
+    background: -webkit-linear-gradient(left, #fff 5%,#069 50%);
+    background: -o-linear-gradient(left, #fff 5%,#069 50%);
+    background: linear-gradient(to right, #fff 5%,#069 50%);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='#FFFFFF', endColorstr='#006699'); /*For IE7-8-9*/
 }
+
 #span-nombre-uv {
     font-size: 2.20em;
     float: right;
@@ -23,46 +23,78 @@
     margin-right: 22px;
     color: #fff;
 }
-#span-estadistica-inscripcion {
-    font-family: 'Segoe UI', Arial,'Comic Sans MS';
-    margin-left:25px; 
-    font-size: 2.00em;
-    float: left;
-    color: #08088A;
-}
-#span-titulo-inscripcion-linea {
-    font-family: 'Segoe UI',Arial,'Comic Sans MS';
-    font-size: 1.50em;
-    margin-left: 25px;
-    clear: left;
-    float: left;
-    color: #0B610B;
-    position: page;
-}
-/*aqui empieza la  hoja de estilos del menu*/
-#menu_general {
+
+#div2 > p {
+    position: relative;
+    left: +5%;
     clear: both;
+    float: left;
+    color: rgb(28, 177, 28);
+    font-size: 140%;
+    font-weight: 600;
+    font-style: normal;
+}
+
+#div2 > ul {
+    clear: left;
     float: left;
     width: 100%;
     list-style: none;
     margin: 0;
     padding: 0;
 }
-    #menu_general li {
+
+    #div2 > ul > li {
         float: left;
     }
-        #menu_general li a {
-            font-family: Arial;
-            font-size: 11px;
+
+        #div2 > ul > li > a {
+            padding: .3em;
+            display: block;
             text-decoration: none;
-            float: left;
-            padding: 10px;
-            background-color: #2175bc;
-            color: #fff;
+            color: #333;
+            background: #F4F4F4;
         }
-            #menu_general li a:hover {
-                background-color: #2586d7;
-                margin-top: -2px;
-                padding-bottom: 12px;
+
+            #div2 > ul > li > a:hover {
+                color: rgb(28, 177, 28);
             }
-            /*termina el estilo del menu*/
+
+            #div2 > ul > li > a:active {
+                background: rgb(173, 173, 180);
+                color: rgb(0, 0, 0);
+            }
+
+#combo {
+    clear: left;
+    float: left;
+}
+
+#divCanvas {
+    text-align: center;
+    box-sizing: border-box;
+    clear: left;
+    float: left;
+    width: 60%;
+    padding: 10px;
+}
+
+.imagenesSeleccion > img {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    width: 40px;
+    height: 40px;
+}
+
+    .imagenesSeleccion > img:hover {
+        filter: opacity(.5);
+        filter: blur(2px);
+        -webkit-filter: grayscale(0%);
+        -moz-filter: grayscale(0%);
+        -ms-filter: grayscale(0%);
+        -o-filter: grayscale(0%);
+        filter: grayscale(0%);
+    }

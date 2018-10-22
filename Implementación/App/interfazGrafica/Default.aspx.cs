@@ -18,7 +18,7 @@ namespace GraficasILinea.App.interfazGrafica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            getPeriodosEducativos();
+
         }
         [System.Web.Services.WebMethod]
         public static string getPeriodosEducativos() {
@@ -28,8 +28,15 @@ namespace GraficasILinea.App.interfazGrafica
         }
         [System.Web.Services.WebMethod]
         public static String getDiasInscripcion(String fecha) {
-            List<InscripcionGeneral> inscripciones = new InscripcionGeneral().obtenerDiasInscripcion(fecha);         
-            var jsonList = JsonConvert.SerializeObject(inscripciones);
+            var jsonList = "";
+            try
+            {
+                List<InscripcionGeneral> inscripciones = new InscripcionGeneral().obtenerDiasInscripcion(fecha);
+                jsonList = JsonConvert.SerializeObject(inscripciones);
+            }
+            catch (SqlException ex) {
+                jsonList = "error";
+            }
             return jsonList;
         }
     }

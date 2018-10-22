@@ -18,7 +18,6 @@ namespace GraficasILinea.App.entidades
         public PeriodoEducativo()
         {
         }
-
         public PeriodoEducativo(String fechaRegistro, String valorRegistro) {
             this.fechaRegistro = fechaRegistro;
             this.valorRegistro = valorRegistro;
@@ -31,6 +30,9 @@ namespace GraficasILinea.App.entidades
         }
         public List<PeriodoEducativo> obtenerPeriodosEducativos() {
             return new PeriodoEducativoDAOSql().obtenerPeriodosEducativos();
+        }
+        public List<PeriodoEducativo> ObtenerDiasInscripcion(String periodoEducativo) {
+            return new PeriodoEducativoDAOSql().ObtenerDiasInscripcion(periodoEducativo);
         }
     }
 }

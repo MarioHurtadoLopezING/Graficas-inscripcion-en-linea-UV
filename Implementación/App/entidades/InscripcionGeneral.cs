@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -24,8 +25,13 @@ namespace GraficasILinea.App.entidades
         }
         public InscripcionGeneral() { }
         public List<InscripcionGeneral> obtenerDiasInscripcion(string periodoInscripcion) {
-            List<InscripcionGeneral> diasInscripcion = new InscripcionGeneralDAOSql().obtenerDiasInscripcion(periodoInscripcion);
-            return diasInscripcion;
+            try
+            {
+                return new InscripcionGeneralDAOSql().obtenerDiasInscripcion(periodoInscripcion);
+            }
+            catch (SqlException sqlExcepciuon) {
+                throw sqlExcepciuon;
+            }
         }
         public int getLugaresSorteados() {
             return this.lugaresSorteados;
