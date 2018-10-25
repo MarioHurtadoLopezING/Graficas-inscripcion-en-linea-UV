@@ -1,57 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using GraficasILinea.App.entidades;
 using System.Data.SqlClient;
 
 namespace GraficasILinea.App.accesoDatos
 {
-    public class RegionDAOSql : RegionDAO
+    public class AreaAcademicaDAOSql : AreaAcademicaDAO
     {
-        public List<Region> obtenerRegionesInscripcion(string periodoInscripcion)
+        public List<AreaAcademica> getAreasAcademicas(string periodoInscripcion)
         {
-            List<Region> regionesInscripcion = new List<Region>();
+            List<AreaAcademica> areasAcademicas = new List<AreaAcademica>();
             List<SqlParameter> parametrosSql = new List<SqlParameter>();
+            parametrosSql.Add(new SqlParameter("@REGION", "0"));
             parametrosSql.Add(new SqlParameter("@FECHA", "0"));
             parametrosSql.Add(new SqlParameter("@PERIODO", periodoInscripcion.Split('|')[0]));
             parametrosSql.Add(new SqlParameter("@IND_MP", (periodoInscripcion.Contains("MP") ? "MP" : "")));
             parametrosSql.Add(new SqlParameter("@IND_IL_PIL", "2"));
-            ConexionSql conexion = new ConexionSql();
-            SqlCommand comandoSql = new SqlCommand("PAS_XREGION", conexion.getconexionSql());
-            comandoSql.CommandType = System.Data.CommandType.StoredProcedure;
-            foreach (SqlParameter parametro in parametrosSql)
-            {
-                comandoSql.Parameters.Add(parametro);
-            }
-            try
-            {
-                SqlDataReader lector = comandoSql.ExecuteReader();
-                while (lector.Read())
-                {
-                    regionesInscripcion.Add(new Region(lector["NOMBRE"].ToString(), int.Parse(lector["TOTALSORT"].ToString()), int.Parse(lector["TOTALINSC"].ToString())));
-                }
-            }
-            catch (SqlException excepcionSql)
-            {
-                throw excepcionSql;
-            }
-            finally
-            {
-                conexion.cerrarConexion();
-            }
-            return regionesInscripcion;
+            return this.obtenerEntidades(parametrosSql);
         }
-        public List<Region> ObtenerRegionesInscripcionDia (String fecha, String periodoInscripcion)
+        public List<AreaAcademica> getAreasAcademicas(string periodoInscripcion, String fecha, int idRegion)
         {
-            List<Region> regionesInscripcion = new List<Region>();
+            List<AreaAcademica> areasAcademicas = new List<AreaAcademica>();
             List<SqlParameter> parametrosSql = new List<SqlParameter>();
+            parametrosSql.Add(new SqlParameter("@REGION", idRegion));
             parametrosSql.Add(new SqlParameter("@FECHA", fecha));
             parametrosSql.Add(new SqlParameter("@PERIODO", periodoInscripcion.Split('|')[0]));
             parametrosSql.Add(new SqlParameter("@IND_MP", (periodoInscripcion.Contains("MP") ? "MP" : "")));
             parametrosSql.Add(new SqlParameter("@IND_IL_PIL", "2"));
+            return this.obtenerEntidades(parametrosSql);            
+        }
+        private List<AreaAcademica> obtenerEntidades(List<SqlParameter> parametrosSql)
+        {
+            List<AreaAcademica> areasAcademicas = new List<AreaAcademica>();
             ConexionSql conexion = new ConexionSql();
-            SqlCommand comandoSql = new SqlCommand("PAS_XREGION", conexion.getconexionSql());
+            SqlCommand comandoSql = new SqlCommand("PAS_XREGION_AREA", conexion.getconexionSql());
             comandoSql.CommandType = System.Data.CommandType.StoredProcedure;
             foreach (SqlParameter parametro in parametrosSql)
             {
@@ -62,7 +44,8 @@ namespace GraficasILinea.App.accesoDatos
                 SqlDataReader lector = comandoSql.ExecuteReader();
                 while (lector.Read())
                 {
-                    regionesInscripcion.Add(new Region(lector["NOMBRE"].ToString(), int.Parse(lector["TOTALSORT"].ToString()), int.Parse(lector["TOTALINSC"].ToString())));
+                    String x = lector["NOMBRE"].ToString() + " " + lector["TOTALSORT"].ToString() + " " + lector["TOTALINSC"].ToString();
+                    areasAcademicas.Add(new AreaAcademica(lector["NOMBRE"].ToString(), int.Parse(lector["TOTALSORT"].ToString()), int.Parse(lector["TOTALINSC"].ToString())));
                 }
             }
             catch (SqlException excepcionSql)
@@ -73,7 +56,7 @@ namespace GraficasILinea.App.accesoDatos
             {
                 conexion.cerrarConexion();
             }
-            return regionesInscripcion;
+            return areasAcademicas;
         }
     }
 }

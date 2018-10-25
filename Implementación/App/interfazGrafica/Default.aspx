@@ -26,10 +26,13 @@
 			<img id="linea" src="../recursosGraficos/vector.png"/>
 		</div>
 	</div>
+
     <div id="tabla">
 		<table id="tab">
 		</table>
 	</div>
+    
     <script src="../Scripts/Graficas.js"></script>
+    <script src="../Scripts/tablaEstadisticas.js"></script>
     <script src="../Scripts/default.js"></script>
 </asp:Content>

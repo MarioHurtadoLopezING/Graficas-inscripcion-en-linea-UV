@@ -10,9 +10,6 @@ function graficaBarras(lista) {
         graficaLineal(lista);
     });
     var canvasGraficas = document.getElementById("canvas");
-    var ctx = canvasGraficas.getContext("2d");
-    ctx.clearRect(0, 0, canvasGraficas.width, canvasGraficas.height);
-
     var fechas = [];
     var lugaresSorteados = [];
     var lugaresInscritos = [];

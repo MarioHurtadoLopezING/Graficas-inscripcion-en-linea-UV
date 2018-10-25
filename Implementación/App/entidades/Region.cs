@@ -2,8 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace GraficasILinea.App.entidades
 {
@@ -23,23 +21,12 @@ namespace GraficasILinea.App.entidades
             this.lugaresSorteados = lugaresSorteados;
             this.lugaresInscritos = lugaresInscritos;
         }
-        public List<Region> obtenerRegionesInscripcion(String periodoInscripcion) {
-            return new RegionDAOSql().obtenerRegionesInscripcion(periodoInscripcion);
+        public List<Region> getRegionesInscripcion(String periodoInscripcion) {
+            return new RegionDAOSql().getRegionesInscripcionPorPeriodo(periodoInscripcion);
         }
-        public List<Region> ObtenerRegionesInscripcionDia(String fecha, String periodoInscripcion)
+        public List<Region> getRegionesInscripcionDia(String fecha, String periodoInscripcion)
         {
-            return new RegionDAOSql().ObtenerRegionesInscripcionDia(fecha,periodoInscripcion);
-        }
-
-            public int getLugaresSorteados() {
-            return this.lugaresSorteados;
-        }
-        public int getLugaresInscritos() {
-            return this.lugaresInscritos;
-        }
-        public string getNombreRegion()
-        {
-            return this.nombreRegion;
+            return new RegionDAOSql().getRegionesInscripcionPorPeriodoYFecha(fecha,periodoInscripcion);
         }
     }
 }

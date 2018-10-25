@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using GraficasILinea.App.entidades;
 using System.Data.SqlClient;
 
@@ -9,7 +7,7 @@ namespace GraficasILinea.App.accesoDatos
 {
     public class PeriodoEducativoDAOSql : PeriodoEducativoDAO
     {
-        public List<PeriodoEducativo> obtenerPeriodosEducativos()
+        public List<PeriodoEducativo> getPeriodosEducativos()
         {
             List<PeriodoEducativo> periodosEducativos = new List<PeriodoEducativo>();
             ConexionSql conexion = new ConexionSql();
@@ -21,10 +19,7 @@ namespace GraficasILinea.App.accesoDatos
                 SqlDataReader lector = comandoSql.ExecuteReader();
                 while (lector.Read())
                 {
-                    if (!lector["FECHA"].ToString().Contains("JUNIO"))
-                    {
-                        periodosEducativos.Add(new PeriodoEducativo(lector["FECHA"].ToString(), lector["VALOR"].ToString()));
-                    }
+                    periodosEducativos.Add(new PeriodoEducativo(lector["FECHA"].ToString(), lector["VALOR"].ToString()));
                 }
             }
             catch (SqlException excepcionSql)
@@ -37,7 +32,7 @@ namespace GraficasILinea.App.accesoDatos
             }
             return periodosEducativos;
         }
-        public List<PeriodoEducativo> ObtenerDiasInscripcion(String periodoEducativo)
+        public List<PeriodoEducativo> getDiasInscripcion(String periodoEducativo)
         {
             List<PeriodoEducativo> diasInscripcion = new List<PeriodoEducativo>();
             ConexionSql conexionSql = new ConexionSql();
@@ -52,7 +47,6 @@ namespace GraficasILinea.App.accesoDatos
                 while (lector.Read())
                 {
                     diasInscripcion.Add(new PeriodoEducativo(lector["FECHA"].ToString(), lector["VALOR"].ToString()));
-
                 }
             }
             catch (SqlException excepcionSql)
@@ -63,7 +57,6 @@ namespace GraficasILinea.App.accesoDatos
             {
                 conexionSql.cerrarConexion();
             }
-
             return diasInscripcion;
         }
     }

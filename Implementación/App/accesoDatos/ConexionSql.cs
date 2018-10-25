@@ -10,30 +10,30 @@ namespace GraficasILinea.App.accesoDatos
 {
     public class ConexionSql
     {
-        private SqlConnection conexion;
+        private SqlConnection conexionSql;
 
         public ConexionSql(){
             this.crearConexion();
         }
-        public void crearConexion() {
+        private void crearConexion() {
             try
             {
-                conexion = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GraficasSqlServer"].ToString());
-                conexion.Open();
+                conexionSql = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GraficasSqlServer"].ToString());
+                conexionSql.Open();
             }
-            catch (SqlException exception)
+            catch (SqlException sqlException)
             {
-                 throw exception;
+                 throw sqlException;
             }
         }
 
         public SqlConnection getconexionSql() {
-            return this.conexion;
+            return this.conexionSql;
         }
 
         public void cerrarConexion() {
-            conexion.Close();
-            conexion.Dispose();
+            conexionSql.Close();
+            conexionSql.Dispose();
         }
     }
 }

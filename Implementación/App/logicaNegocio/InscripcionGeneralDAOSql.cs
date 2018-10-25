@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using GraficasILinea.App.entidades;
 using System.Data.SqlClient;
 
@@ -9,7 +7,7 @@ namespace GraficasILinea.App.accesoDatos
 {
     public class InscripcionGeneralDAOSql : InscripcionGeneralDAO
     {
-        public List<InscripcionGeneral> obtenerDiasInscripcion(String periodoInscripcion)
+        public List<InscripcionGeneral> getDiasInscripcion(String periodoInscripcion)
         {
             List<InscripcionGeneral> diasInscripcion = new List<InscripcionGeneral>();
             List<SqlParameter> parametrosSql = new List<SqlParameter>();

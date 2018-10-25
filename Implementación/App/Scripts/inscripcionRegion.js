@@ -6,6 +6,10 @@ function buscarRegistros() {
     var parametro = lista.split("=")[1];
     console.log(parametro);
     obtenerDias(parametro);
+    var tabla = document.getElementById("tabla");
+    while (tabla.firstChild) {
+        tabla.removeChild(tabla.firstChild);
+    }
     $.ajax({
         type: "POST",
         url: 'inscripcionRegion.aspx/getRegionesInscripcion',
@@ -71,12 +75,15 @@ function cargarComboDias(listaDias) {
 }
 /**............................*/
 function buscarDatos(fecha, periodo, listaDias) {
-    alert(fecha + " " + periodo);
     var objeto;
     $.each(listaDias, function (i, item) {
         if (fecha === item["fechaRegistro"]) {
             objeto = item;
         }//getRegionesInscripcionDia(String fecha, String periodoEducativo)
+    });
+    document.getElementById("menuArea").addEventListener("click", function () {
+        alert();
+        document.getElementById("menuArea").href = "inscripcionArea.aspx";
     });
     $.ajax({
         type: "POST",
@@ -94,6 +101,10 @@ function buscarDatos(fecha, periodo, listaDias) {
             }
             lista = JSON.parse(lista);
             console.log(lista);
+            var tabla = document.getElementById("tabla");
+            while (tabla.firstChild) {
+                tabla.removeChild(tabla.firstChild);
+            }
             crearTabla(lista);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -101,72 +112,5 @@ function buscarDatos(fecha, periodo, listaDias) {
             alert(error.Message);
         }
     });
-
 }
 /*----------------------------*/
-function crearTabla(lista) {
-    console.log(lista);
-    var totalSorteado = 0;
-    var totalInscrito = 0;
-    $.each(lista, function (i, item) {
-        totalSorteado = totalSorteado + item["lugaresSorteados"];
-        totalInscrito = totalInscrito + item["lugaresInscritos"];
-    });
-    var tabla = document.getElementById("tabla");
-    for (var i = 0; i < lista.length; i++) {
-        var objetoJson = lista[i];
-        var filaEncabezado = document.createElement("tr");
-        for (var clave in objetoJson) {
-            var celda = document.createElement("th");
-            var texto = document.createTextNode(clave);
-            celda.appendChild(texto);
-            filaEncabezado.appendChild(celda);
-        }
-        var celda = document.createElement("th");
-        var texto = document.createTextNode("% Total");
-        celda.appendChild(texto);
-        filaEncabezado.appendChild(celda);
-        tabla.appendChild(filaEncabezado);
-        break;
-    }
-    for (var i = 0; i < lista.length; i++) {
-        var objeto = lista[i];
-        var fila = document.createElement("tr");
-        for (var clave in objeto) {
-            var celda = document.createElement("td");
-            var texto = document.createTextNode(objeto[clave]);
-            celda.appendChild(texto);
-            fila.appendChild(celda);
-        }
-        var resultado = objeto["lugaresInscritos"] * 100;
-        resultado = resultado / objeto["lugaresSorteados"];
-        fila.appendChild(document.createElement("td").appendChild(document.createTextNode(resultado)));
-        tabla.appendChild(fila);
-    }
-    var fila = document.createElement("tr");
-    var celda = document.createElement("td");
-    var texto = document.createTextNode("Total");
-    celda.appendChild(texto);
-    fila.appendChild(celda);
-
-    var celda1 = document.createElement("td");
-    var texto1 = document.createTextNode(totalSorteado);
-    celda1.appendChild(texto1);
-    fila.appendChild(celda1);
-
-    var celda2 = document.createElement("td");
-    var texto2 = document.createTextNode(totalInscrito);
-    celda2.appendChild(texto2);
-    fila.appendChild(celda2);
-
-    var total = totalInscrito * 100;
-    total = total / totalSorteado;
-    var celda3 = document.createElement("td");
-    var texto3 = document.createTextNode(total);
-    celda3.appendChild(texto3);
-    fila.appendChild(celda3);
-
-    tabla.appendChild(fila);
-    graficaBarras(lista);
-
-}

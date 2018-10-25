@@ -2,8 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace GraficasILinea.App.entidades
 {
@@ -15,24 +13,16 @@ namespace GraficasILinea.App.entidades
         [JsonProperty]
         private String valorRegistro;
 
-        public PeriodoEducativo()
-        {
-        }
+        public PeriodoEducativo(){}
         public PeriodoEducativo(String fechaRegistro, String valorRegistro) {
             this.fechaRegistro = fechaRegistro;
             this.valorRegistro = valorRegistro;
         }
-        public String getFechaRegistro() {
-            return this.fechaRegistro;
-        }
-        public String getValorRegistro() {
-            return this.valorRegistro;
-        }
         public List<PeriodoEducativo> obtenerPeriodosEducativos() {
-            return new PeriodoEducativoDAOSql().obtenerPeriodosEducativos();
+            return new PeriodoEducativoDAOSql().getPeriodosEducativos();
         }
         public List<PeriodoEducativo> ObtenerDiasInscripcion(String periodoEducativo) {
-            return new PeriodoEducativoDAOSql().ObtenerDiasInscripcion(periodoEducativo);
+            return new PeriodoEducativoDAOSql().getDiasInscripcion(periodoEducativo);
         }
     }
 }

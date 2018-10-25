@@ -1,15 +1,18 @@
 ﻿using GraficasILinea.App.accesoDatos;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace GraficasILinea.App.entidades
 {
+    [JsonObject(MemberSerialization.OptOut)]
     public class AreaAcademica
     {
+        [JsonProperty]
         private String nombreAreaAcademica;
+        [JsonProperty]
         private int lugaresSorteados;
+        [JsonProperty]
         private int lugaresInscritos;
 
         public AreaAcademica(String nombreAreaAcademica, int lugaresSorteados, int lugaresInscritos) {
@@ -18,20 +21,11 @@ namespace GraficasILinea.App.entidades
             this.lugaresInscritos = lugaresInscritos;
         }
         public AreaAcademica() { }
-        public List<AreaAcademica> obtenerAreasAcademicasInscripcion(string periodoInscripcion)
-        {
-            return new AreaAcademicaDAOSql().obtenerAreasAcademicasInscripcion(periodoInscripcion);
-        }        
-        public int getLugaresSorteados()
-        {
-            return this.lugaresSorteados;
+        public List<AreaAcademica> getAreasAcademicas(string periodoInscripcion) {
+            return new AreaAcademicaDAOSql().getAreasAcademicas(periodoInscripcion);
         }
-        public int getLugaresInscritos()
-        {
-            return this.lugaresInscritos;
-        }
-        public string getAreaAcademica() {
-            return this.nombreAreaAcademica;
+        public List<AreaAcademica> getAreasAcademicas(String periodoInscripcion, String fecha, int idRegion) {
+            return new AreaAcademicaDAOSql().getAreasAcademicas(periodoInscripcion,fecha,idRegion);
         }
     }
 }

@@ -23,8 +23,8 @@
 				<ul>
 					<li><a href="Default.aspx">Muestra general</a></li>
 					<li><a id="menuRegion">Región</a></li>
-					<li><a href="#">Área académica</a></li>
-					<li><a href="#">Programa educativo</a></li>
+					<li><a id="menuArea" href="inscripcionAreaAcademica.aspx">Área académica</a></li>
+					<li><a href="InscripcionProgramaEducativo.aspx">Programa educativo</a></li>
 				</ul>
 			</div>
 		</div>  

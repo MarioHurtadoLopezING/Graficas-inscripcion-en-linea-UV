@@ -11,7 +11,7 @@
 		</select>
 	</div>
 	<div id="divCanvas">
-		<h4 id="lblPeriodoInscripcion"></h4>
+		<h4 id="lblPeriodoInscripcion">hola mundo</h4>
 		<canvas id="canvas">
 		</canvas>
 		<div class="imagenesSeleccion">
@@ -26,6 +26,7 @@
 	</div>
     <script src="../Scripts/Graficas.js"></script>
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <script src="../Scripts/tablaEstadisticas.js"></script>
      <script src="../Scripts/inscripcionRegion.js"></script>
     <script src="../Scripts/Chart.min.js"></script>
 </asp:Content>
