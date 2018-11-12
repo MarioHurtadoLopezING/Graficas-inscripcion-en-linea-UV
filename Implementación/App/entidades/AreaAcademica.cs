@@ -24,6 +24,9 @@ namespace GraficasILinea.App.entidades
         public List<AreaAcademica> getAreasAcademicas(string periodoInscripcion) {
             return new AreaAcademicaDAOSql().getAreasAcademicas(periodoInscripcion);
         }
+        public List<AreaAcademica> getAreasAcademicas(string periodoInscripcion, int idRegion) { 
+            return new AreaAcademicaDAOSql().getAreasAcademicas(periodoInscripcion, idRegion);
+        }
         public List<AreaAcademica> getAreasAcademicas(String periodoInscripcion, String fecha, int idRegion) {
             return new AreaAcademicaDAOSql().getAreasAcademicas(periodoInscripcion,fecha,idRegion);
         }

@@ -8,7 +8,6 @@ namespace GraficasILinea.App.interfazGrafica
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            getProgramasEducativos("201901|MP",1,1, "20180521");
         }
         [System.Web.Services.WebMethod]
         public static String getProgramasEducativos(String periodoInscripcion)
@@ -16,7 +15,17 @@ namespace GraficasILinea.App.interfazGrafica
             return JsonConvert.SerializeObject(new ProgramaEducativo().getProgramasEducativos(periodoInscripcion));
         }
         [System.Web.Services.WebMethod]
-        public static String getProgramasEducativos(string periodoInscripcion, int idRegion, int idAreaAcademica, string fecha)
+        public static String getAreasAcademicas(string periodoInscripcion)
+        {
+            return JsonConvert.SerializeObject(new AreaAcademica().getAreasAcademicas(periodoInscripcion));
+        }
+        [System.Web.Services.WebMethod]
+        public static String getProgramasEducativosPeriodoYArea(String periodoInscripcion, int idAreaAcademica)
+        {
+            return JsonConvert.SerializeObject(new ProgramaEducativo().getProgramasEducativos(periodoInscripcion, idAreaAcademica));
+        }    
+        [System.Web.Services.WebMethod]
+        public static String getProgramasEducativosPorFechaYArea(string periodoInscripcion, int idRegion, int idAreaAcademica, string fecha)
         {
             return JsonConvert.SerializeObject(new ProgramaEducativo().getProgramasEducativos(periodoInscripcion, idRegion, idAreaAcademica, fecha));
         }

@@ -28,6 +28,10 @@ namespace GraficasILinea.App.entidades
         {
             return new ProgramaEducativoDAOSql().getProgramasEducativos(periodoInscripcion);
         }
+        public List<ProgramaEducativo> getProgramasEducativos(String periodoInscripcion, int idRegion)
+        {
+            return new ProgramaEducativoDAOSql().getProgramasEducativos(periodoInscripcion, idRegion);
+        }
 
         public List<ProgramaEducativo> getProgramasEducativos(string periodoInscripcion, int idRegion, int idAreaAcademica, string fecha)
         {

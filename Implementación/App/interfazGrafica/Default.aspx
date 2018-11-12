@@ -2,37 +2,41 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <script src="../Scripts/Chart.min.js"></script>
-    <script src="../Scripts/jquery-3.3.1.min.js"></script>
-    <link href="Styles/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    
-    <div id="combo">
-		<label>Consultar por:</label>
-		<select>
-			<option>PERIODO COMPLETO</option>
-            <option>INTERSEMESTRAL</option>
-		</select>
-		<label>Periodo:</label>
-		<select id="comboPeriodos">
-		</select>
-	</div>
-	<div id="divCanvas">
-		<h4 id="lblPeriodoInscripcion"></h4>
-		<canvas id="canvas">
-		</canvas>
-		<div class="imagenesSeleccion">
-			<img id="pastel" src="../recursosGraficos/chart-pie.png"/>
-			<img id="barra" src="../recursosGraficos/graficas.png"/>
-			<img id="linea" src="../recursosGraficos/vector.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div id="divContenidoPagina">
+		<div id="divCombos">
+			<label>Consultar por:</label>
+			<select>
+				<option>PERIODO COMPLETO</option>
+			</select>
+			<label>Periodo:</label>
+			<select id="comboPeriodos">
+			</select>
+		</div>
+		<div>
+			<div id="divCanvasGrafica">
+				<center><h4 id="tituloGrafica"></h4></center>
+				<div id ="divGrafica">
+                    <canvas id="canvasGrafica">
+				    </canvas>	
+				</div>
+				<div class="imagenesSeleccion">
+					<img id="pastel" src="../recursosGraficos/chart-pie.png"/>
+					<img id="barra" src="../recursosGraficos/graficas.png"/>
+					<img id="linea" src="../recursosGraficos/vector.png"/>
+				</div>
+			</div>
+		</div>
+		<div id="divTablaEstadistica">
+			<center>
+				<table id="tabla">
+				</table>
+			</center>
 		</div>
 	</div>
-
-    <div id="tabla">
-		<table id="tab">
-		</table>
-	</div>
-    
-    <script src="../Scripts/Graficas.js"></script>
-    <script src="../Scripts/tablaEstadisticas.js"></script>
+   <script src="../Scripts/recursos/Graficas.js"></script>
+    <script src="../Scripts/recursos/jquery-3.3.1.min.js"></script>
+    <script src="../Scripts/recursos/Chart.min.js"></script>
+    <script src="../Scripts/recursos/tablaEstadisticas.js"></script>
     <script src="../Scripts/default.js"></script>
 </asp:Content>

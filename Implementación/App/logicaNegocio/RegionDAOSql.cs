@@ -7,6 +7,12 @@ namespace GraficasILinea.App.accesoDatos
 {
     public class RegionDAOSql : RegionDAO
     {
+        /// <summary>
+        /// Método publico de tipo List<> que regresa un conjunto de regiones que tengan registrado una estadistica de
+        /// inscripción a partir de un periodo
+        /// </summary>
+        /// <param name="periodoInscripcion"> Parametro de tipo string que representa un periodo de inscripción</param>
+        /// <returns></returns>
         public List<Region> getRegionesInscripcionPorPeriodo(string periodoInscripcion)
         {
             List<SqlParameter> parametrosSql = new List<SqlParameter>();
@@ -16,6 +22,12 @@ namespace GraficasILinea.App.accesoDatos
             parametrosSql.Add(new SqlParameter("@IND_IL_PIL", "2"));
             return this.obtenerEntidades(parametrosSql);
         }
+        /// <summary>
+        /// Método publico de tipo List<Region> 
+        /// </summary>
+        /// <param name="fecha"></param>
+        /// <param name="periodoInscripcion"></param>
+        /// <returns></returns>
         public List<Region> getRegionesInscripcionPorPeriodoYFecha(String fecha, String periodoInscripcion)
         {
             List<SqlParameter> parametrosSql = new List<SqlParameter>();

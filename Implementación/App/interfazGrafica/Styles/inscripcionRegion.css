@@ -1,0 +1,12 @@
+﻿body {
+}
+#btnPeriodo {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.fuente {
+    font-size: 1.5em;
+}

@@ -14,20 +14,22 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="estatico">
-			<div id="div-nombre-uv">
-				<span id="span-nombre-uv">Universidad Veracruzana</span>
-			</div>
-			<div id ="div2">
-				<p>Gráficas de inscripción en línea</p>
-				<ul>
-					<li><a href="Default.aspx">Muestra general</a></li>
-					<li><a id="menuRegion">Región</a></li>
-					<li><a id="menuArea" href="inscripcionAreaAcademica.aspx">Área académica</a></li>
-					<li><a href="InscripcionProgramaEducativo.aspx">Programa educativo</a></li>
-				</ul>
-			</div>
-		</div>  
+        <header id="cabeceraPagina">
+            <div id="cabecera">
+	            <div id="div-nombre-uv">
+		            <span id="span-nombre-uv">Universidad 	Veracruzana</span>
+	            </div>
+	            <div class="posicionar">
+		            <center><h2 class="separar">Gráficas de inscripción en linea</h2></center>
+		            <ul id="menu">
+			            <li><a href="Default.aspx">Muestra general</a></li>
+			            <li><a id="menuRegion">Región</a></li>
+			            <li><a id="menuAreaAcademica">Área académica</a></li>
+			            <li><a id="menuProgramaEducativo">Programa educativo</a></li>
+		            </ul>
+	            </div>
+            </div>
+        </header>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

@@ -33,25 +33,27 @@
         }
         var resultado = objeto["lugaresInscritos"] * 100;
         resultado = resultado / objeto["lugaresSorteados"];
+        resultado = resultado.toFixed(2)+ " %";
         fila.appendChild(document.createElement("td").appendChild(document.createTextNode(resultado)));
         tabla.appendChild(fila);
     }
     var fila = document.createElement("tr");
-    var celda = document.createElement("td");
+    var celda = document.createElement("th");
     var texto = document.createTextNode("Total");
     celda.appendChild(texto);
     fila.appendChild(celda);
-    var celda1 = document.createElement("td");
+    var celda1 = document.createElement("th");
     var texto1 = document.createTextNode(totalSorteado);
     celda1.appendChild(texto1);
     fila.appendChild(celda1);
-    var celda2 = document.createElement("td");
+    var celda2 = document.createElement("th");
     var texto2 = document.createTextNode(totalInscrito);
     celda2.appendChild(texto2);
     fila.appendChild(celda2);
     var total = totalInscrito * 100;
     total = total / totalSorteado;
-    var celda3 = document.createElement("td");
+    total = total.toFixed(2) + " %";
+    var celda3 = document.createElement("th");
     var texto3 = document.createTextNode(total);
     celda3.appendChild(texto3);
     fila.appendChild(celda3);

@@ -1,11 +1,12 @@
 ﻿$(document).ready(function () {
-    buscarRegistros();
+    document.getElementById('tituloGrafica').innerHTML = "Inscripción en línea general por región";
+    buscarRegistrosPeriodo();
+    buscarRegistros(window.location.search.substr(1).split("=")[1]);
 });
-function buscarRegistros() {
-    var lista = window.location.search.substr(1);
-    var parametro = lista.split("=")[1];
-    console.log(parametro);
-    obtenerDias(parametro);
+function buscarRegistros(fechaRegistro) { 
+    document.getElementById("menuAreaAcademica").href = "inscripcionAreaAcademica.aspx?periodo=" + fechaRegistro;
+    document.getElementById("menuProgramaEducativo").href = "InscripcionProgramaEducativo.aspx?periodo=" + fechaRegistro;
+    obtenerDias(fechaRegistro);
     var tabla = document.getElementById("tabla");
     while (tabla.firstChild) {
         tabla.removeChild(tabla.firstChild);
@@ -13,19 +14,17 @@ function buscarRegistros() {
     $.ajax({
         type: "POST",
         url: 'inscripcionRegion.aspx/getRegionesInscripcion',
-        data: JSON.stringify({ periodoInscripcion: parametro}),
+        data: JSON.stringify({ periodoInscripcion: fechaRegistro}),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: true,
         success: function (data) {
-            var datos = JSON.stringify(data);
-            datos = JSON.parse(datos);
+            var datos = JSON.parse(JSON.stringify(data));
             var lista;
             for (key in datos) {
                 lista = datos[key];
             }
             lista = JSON.parse(lista);
-            console.log(lista);
             crearTabla(lista);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -33,7 +32,46 @@ function buscarRegistros() {
             alert(error.Message);
         }
     });
-}//getDiasInscripcion
+}
+function buscarRegistrosPeriodo() {
+    $.ajax({
+        type: 'POST',
+        url: 'inscripcionRegion.aspx/getPeriodosEducativos',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: true,
+         success: function (data) {
+            var datos = JSON.parse(JSON.stringify(data));
+            var lista;
+            for (key in datos) {
+                lista = datos[key];
+            }
+            cargarComboPeriodos(JSON.parse(lista));
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            var error = eval("(" + XMLHttpRequest.responseText + ")");
+            alert(error.Message);
+        }
+    });
+}
+function cargarComboPeriodos(listaPeriodos) {
+    var comboPeriodos = document.getElementById("comboPeriodos");
+    $.each(listaPeriodos, function (i, periodo) {
+        var opcionPeriodo = document.createElement("option");
+        var periodoInscripcion = document.createTextNode(periodo["fechaRegistro"]);
+        opcionPeriodo.appendChild(periodoInscripcion);
+        comboPeriodos.appendChild(opcionPeriodo);
+    });
+    comboPeriodos.onchange = function () {
+        var objeto;
+        $.each(listaPeriodos, function (i, item) {
+            if (comboPeriodos.value === item["fechaRegistro"]) {
+                objeto = item;
+            }
+        });
+        buscarRegistros(objeto["valorRegistro"]);
+    }
+}
 function obtenerDias(periodoEducativo) {
     $.ajax({
         type: "POST",
@@ -43,15 +81,12 @@ function obtenerDias(periodoEducativo) {
         dataType: "json",
         async: true,
         success: function (data) {
-            var datos = JSON.stringify(data);
-            datos = JSON.parse(datos);
+            datos = JSON.parse(JSON.stringify(data));
             var lista;
             for (key in datos) {
                 lista = datos[key];
             }
-            lista = JSON.parse(lista);
-            console.log(lista);
-            cargarComboDias(lista);
+            cargarComboDias(JSON.parse(lista), periodoEducativo);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             var error = eval("(" + XMLHttpRequest.responseText + ")");
@@ -59,31 +94,28 @@ function obtenerDias(periodoEducativo) {
         }
     });
 }
-function cargarComboDias(listaDias) {
+function cargarComboDias(listaDias, periodoEducativo) {
     var comboDias = document.getElementById("comboDiasInscripcion");
+    while (comboDias.firstChild) {
+        comboDias.removeChild(comboDias.firstChild);
+    }
     $.each(listaDias, function (i, dia) {
         var opcionDia = document.createElement("option");
         var periodoInscripcion = document.createTextNode(dia["fechaRegistro"]);
-        console.log(dia["valorRegistro"]);
         opcionDia.appendChild(periodoInscripcion);
         comboDias.onchange = function () {
-            var lista = window.location.search.substr(1);
-            buscarDatos(comboDias.value, lista.split("=")[1], listaDias);
+            buscarDatos(comboDias.value, periodoEducativo, listaDias);
         }
         comboDias.appendChild(opcionDia);
     });
 }
-/**............................*/
+
 function buscarDatos(fecha, periodo, listaDias) {
     var objeto;
     $.each(listaDias, function (i, item) {
         if (fecha === item["fechaRegistro"]) {
             objeto = item;
-        }//getRegionesInscripcionDia(String fecha, String periodoEducativo)
-    });
-    document.getElementById("menuArea").addEventListener("click", function () {
-        alert();
-        document.getElementById("menuArea").href = "inscripcionArea.aspx";
+        }
     });
     $.ajax({
         type: "POST",
@@ -93,18 +125,17 @@ function buscarDatos(fecha, periodo, listaDias) {
         dataType: "json",
         async: true,
         success: function (data) {
-            var datos = JSON.stringify(data);
-            datos = JSON.parse(datos);
+            datos = JSON.parse(JSON.stringify(data));
             var lista;
             for (key in datos) {
                 lista = datos[key];
             }
             lista = JSON.parse(lista);
-            console.log(lista);
             var tabla = document.getElementById("tabla");
             while (tabla.firstChild) {
                 tabla.removeChild(tabla.firstChild);
             }
+            document.getElementById('tituloGrafica').innerHTML = "Inscripción en línea: " + objeto["fechaRegistro"];
             crearTabla(lista);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -113,4 +144,3 @@ function buscarDatos(fecha, periodo, listaDias) {
         }
     });
 }
-/*----------------------------*/

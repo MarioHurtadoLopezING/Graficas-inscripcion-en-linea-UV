@@ -17,6 +17,17 @@ namespace GraficasILinea.App.accesoDatos
             parametrosSql.Add(new SqlParameter("@IND_IL_PIL", "2"));
             return this.obtenerEntidades(parametrosSql);
         }
+        public List<ProgramaEducativo> getProgramasEducativos(string periodoInscripcion, int idAreaAcademica)
+        {
+            List<SqlParameter> parametrosSql = new List<SqlParameter>();
+            parametrosSql.Add(new SqlParameter("@REGION", "0"));
+            parametrosSql.Add(new SqlParameter("@AREA", idAreaAcademica));
+            parametrosSql.Add(new SqlParameter("@FECHA", "0"));
+            parametrosSql.Add(new SqlParameter("@PERIODO", periodoInscripcion.Split('|')[0]));
+            parametrosSql.Add(new SqlParameter("@IND_MP", (periodoInscripcion.Contains("MP") ? "MP" : "")));
+            parametrosSql.Add(new SqlParameter("@IND_IL_PIL", "2"));
+            return this.obtenerEntidades(parametrosSql);
+        }
         public List<ProgramaEducativo> getProgramasEducativos(string periodoInscripcion, int idRegion, int idAreaAcademica, string fecha)
         {
             List<SqlParameter> parametrosSql = new List<SqlParameter>();

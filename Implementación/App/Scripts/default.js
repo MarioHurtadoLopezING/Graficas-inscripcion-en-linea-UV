@@ -6,14 +6,11 @@
         dataType: "json",
         async: true,
         success: function (data) {
-            var listaPeriodos = JSON.stringify(data);
-            listaPeriodos = JSON.parse(listaPeriodos);
-            var PeriodosInscripcion;
+            listaPeriodos = JSON.parse(JSON.stringify(data));
             for (clave in listaPeriodos) {
-                PeriodosInscripcion = listaPeriodos[clave];
+                listaPeriodos = listaPeriodos[clave];
             }
-            PeriodosInscripcion = JSON.parse(PeriodosInscripcion);
-            cargarComboPeriodos(PeriodosInscripcion);
+            cargarComboPeriodos(JSON.parse(listaPeriodos));
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             var error = eval("(" + XMLHttpRequest.responseText + ")");
@@ -21,14 +18,17 @@
         }
     });
 });
-
-/*------------------------------------------------------------------------*/
 function cargarComboPeriodos(periodosInscripcion) {
     var comboPeriodos = document.getElementById("comboPeriodos");
     $.each(periodosInscripcion, function (i, periodo) {
         var opcionPeriodo = document.createElement("option");
         var periodoInscripcion = document.createTextNode(periodo["fechaRegistro"]);
-        console.log(periodo["valorRegistro"]);
+        if (periodo["valorRegistro"].indexOf('M') > 0) {
+            document.getElementById("menuRegion").href = "inscripcionRegion.aspx?periodo=" + periodo["valorRegistro"];
+            document.getElementById("menuAreaAcademica").href = "inscripcionAreaAcademica.aspx?periodo=" + periodo["valorRegistro"];
+            document.getElementById("menuProgramaEducativo").href = "InscripcionProgramaEducativo.aspx?periodo=" + periodo["valorRegistro"];
+            buscarRegistros(periodo["fechaRegistro"], periodosInscripcion);
+        }
         opcionPeriodo.appendChild(periodoInscripcion);
         comboPeriodos.appendChild(opcionPeriodo);
     });
@@ -36,7 +36,6 @@ function cargarComboPeriodos(periodosInscripcion) {
         buscarRegistros(comboPeriodos.value, periodosInscripcion);
     }
 }
-/*------------------------------------------------------------------------*/
 function buscarRegistros(fecha, lista) {
     var tabla = document.getElementById("tabla");
     while (tabla.firstChild) {
@@ -46,12 +45,13 @@ function buscarRegistros(fecha, lista) {
     $.each(lista, function (i, item) {
         if (fecha === item["fechaRegistro"]) {
             objeto = item;
+            document.getElementById("menuRegion").href = "inscripcionRegion.aspx?periodo=" + objeto["valorRegistro"];
+            document.getElementById("menuAreaAcademica").href = "inscripcionAreaAcademica.aspx?periodo=" + objeto["valorRegistro"];
+            document.getElementById("menuProgramaEducativo").href = "InscripcionProgramaEducativo.aspx?periodo=" + objeto["valorRegistro"];
         }
     });
-    document.getElementById("menuRegion").addEventListener("click", function () {
-        document.getElementById("menuRegion").href = "inscripcionRegion.aspx?periodo="+objeto["valorRegistro"];
-    });
-    document.getElementById("lblPeriodoInscripcion").innerHTML = "Inscripción en línea " + objeto["fechaRegistro"];
+    var tituloGrafica = document.getElementById("tituloGrafica");
+    tituloGrafica.innerHTML = "Inscripción en línea " + objeto["fechaRegistro"];
     $.ajax({
         type: "POST",
         url: 'Default.aspx/getDiasInscripcion',
@@ -60,18 +60,15 @@ function buscarRegistros(fecha, lista) {
         dataType: "json",
         async: true,
         success: function (data) {
-            var datos = JSON.stringify(data);
-            datos = JSON.parse(datos);
-            var lista;
+            var datos = JSON.parse(JSON.stringify(data));
             for (key in datos) {
-                lista = datos[key];
+                datos = datos[key];
             }
-            lista = JSON.parse(lista);
-            crearTabla(lista);
+            crearTabla(JSON.parse(datos));
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             var error = eval("(" + XMLHttpRequest.responseText + ")");
-            alert(error.Message);
+            alert(error.Messa+ge);
         }
     });
 }
